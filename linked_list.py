@@ -1,8 +1,8 @@
 # constructor: node and LL
 class Node:
-    def __init__(self, value, next=None):
+    def __init__(self, value):
         self.value = value
-        self.next = next
+        self.next = None
 
 class LinkedList:
     def __init__(self, node):
@@ -19,6 +19,7 @@ class LinkedList:
         while ptr.next is not None:
             final += f" {ptr.value} ->"
             ptr = ptr.next
+            print(ptr.value)
         final += f" {ptr.value}"
         return final
 
@@ -47,10 +48,11 @@ class LinkedList:
         self.length -= 1
 
     def prepend(self, node):
-        ptr = self.head
+        temp = self.head
         self.head = node
-        self.head.next = ptr
+        self.head.next = temp
         self.length += 1
+        return
 
     def pop_first(self):
         ptr = self.head
@@ -58,6 +60,33 @@ class LinkedList:
         self.length -= 1
         ptr.next = None
 
+    def get(self, pos):
+        try:
+            temp = self.head
+            for i in range(pos):
+                temp = temp.next
+            print(temp.value)
+            return temp
+        except:
+            print("couldn't find said index.")
+
+    def set(self, pos, value):
+        node = self.get(pos)
+        if node:
+            node.value = value
+
+    def insert(self, pos, node):
+        if pos == 0:
+            self.prepend(node)
+            return
+        pre = self.head
+        temp = self.head
+        for i in range(pos):
+            pre = temp
+            temp = temp.next
+        pre.next = node
+        node.next = temp
+        
     def reverse(self):
         # 5 -> 2 -> 4 -> 6
         # 6 -> 4 -> 2 -> 5
@@ -79,3 +108,15 @@ linked_list.append(node4)
 linked_list.append(node6)
 print(linked_list)
 
+node7 = Node(7)
+linked_list.prepend(node7)
+print(linked_list)
+
+# linked_list.pop_first()
+# print(linked_list)
+linked_list.get(4)
+linked_list.set(8,8)
+print(linked_list)
+
+linked_list.insert(0,Node(15))
+print(linked_list)
