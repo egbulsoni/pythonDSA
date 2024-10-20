@@ -90,13 +90,23 @@ class LinkedList:
     def reverse(self):
         # 5 -> 2 -> 4 -> 6
         # 6 -> 4 -> 2 -> 5
-        pass
+        # pointers to manage the reversal
+        prev = None
+        current = self.head
 
+        # Update the tail to be the current head
+        self.tail = current
 
-
-
-
-
+        while current:
+            next_node = current.next # Save the next node
+            current.next = prev # Reverse the current node's pointer
+            prev = current # Move 'prev' forward
+            current = next_node # Move 'current' forward
+        
+        # Update head to be the last node we processed
+        self.head = prev
+        
+        
 node = Node(5)
 linked_list = LinkedList(node)
 node2 = Node(2)
@@ -108,15 +118,18 @@ linked_list.append(node4)
 linked_list.append(node6)
 print(linked_list)
 
-node7 = Node(7)
-linked_list.prepend(node7)
-print(linked_list)
-
-# linked_list.pop_first()
+# node7 = Node(7)
+# linked_list.prepend(node7)
 # print(linked_list)
-linked_list.get(4)
-linked_list.set(8,8)
-print(linked_list)
 
-linked_list.insert(0,Node(15))
+# # linked_list.pop_first()
+# # print(linked_list)
+# linked_list.get(4)
+# linked_list.set(8,8)
+# print(linked_list)
+
+# linked_list.insert(0,Node(15))
+# print(linked_list)
+
+linked_list.reverse()
 print(linked_list)
