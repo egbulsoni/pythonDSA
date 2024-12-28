@@ -15,13 +15,12 @@ class LinkedList:
         if self.length < 1:
             return "<Empty List>"
         ptr = self.head
-        final = ""
+        entire_ll = ""
         while ptr.next is not None:
-            final += f" {ptr.value} ->"
+            entire_ll += f" {ptr.value} ->"
             ptr = ptr.next
-            print(ptr.value)
-        final += f" {ptr.value}"
-        return final
+        entire_ll += f" {ptr.value} -> None"
+        return entire_ll
 
     # append
     def append(self, node):
@@ -86,30 +85,10 @@ class LinkedList:
             temp = temp.next
         pre.next = node
         node.next = temp
-        
-    # def reverse(self):
-    #     # 5 -> 2 -> 4 -> 6
-    #     # 6 -> 4 -> 2 -> 5
-    #     # pointers to manage the reversal
-    #     prev = None
-    #     current = self.head
-
-    #     # Update the tail to be the current head
-    #     self.tail = current
-
-    #     while current:
-    #         next_node = current.next # Save the next node
-    #         current.next = prev # Reverse the current node's pointer
-    #         prev = current # Move 'prev' forward
-    #         current = next_node # Move 'current' forward
-        
-    #     # Update head to be the last node we processed
-    #     self.head = prev
 
     def reverse(self):
         temp = self.head
-        self.head = self.tail
-        self.tail = temp
+        self.head, self.tail = self.tail, self.head
 
         after = None
         before = None
@@ -123,14 +102,18 @@ class LinkedList:
 
         
 node = Node(5)
-linked_list = LinkedList(node)
 node2 = Node(2)
-node4 = Node(4)
-node6 = Node(6)
+node3 = Node(4)
+node4 = Node(6)
 
+linked_list = LinkedList(node)
 linked_list.append(node2)
+linked_list.append(node3)
 linked_list.append(node4)
-linked_list.append(node6)
+
+print(linked_list)
+
+linked_list.reverse()
 print(linked_list)
 
 # node7 = Node(7)
@@ -145,6 +128,3 @@ print(linked_list)
 
 # linked_list.insert(0,Node(15))
 # print(linked_list)
-
-linked_list.reverse()
-print(linked_list)
